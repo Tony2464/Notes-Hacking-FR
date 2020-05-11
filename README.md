@@ -1,4 +1,4 @@
-# Notes pour du test d'intrusion Anthony Fargette 2020 
+# Notes pour du test d'intrusion Anthony Fargette 2020
 
 ## Table des matières
 
@@ -32,7 +32,12 @@
       - [Scan Null](#scan-null)
       - [NSE (Nmap Scripting Engine)](#nse-nmap-scripting-engine)
       - [Options supplémentaires](#options-suppl%c3%a9mentaires)
+    - [Connexion à distance](#connexion-%c3%a0-distance)
+    - [Scan de vulnérabilités avec Nessus](#scan-de-vuln%c3%a9rabilit%c3%a9s-avec-nessus)
   - [3. Exploitation](#3-exploitation)
+    - [Medusa](#medusa)
+    - [Metasploit](#metasploit)
+  - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 ## Abréviations
 
@@ -59,10 +64,10 @@ Demander la configuration dhcp :
 
 ## 4 Phases de pénétration
 
-1. [Reconnaissance](#reconnaissance)
-2. [Scan](#scan)
-3. Exploitation
-4. Postexploitation et maintien de l’accès
+1. [Reconnaissance](#1-reconnaissance)
+2. [Scan](#3-exploitation)
+3. [Exploitation](#3-exploitation)
+4. [Postexploitation et maintien de l’accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 **PTES** *(Penetration Pesting Execution Standard)*
 
@@ -310,4 +315,100 @@ Différentes catégories :
 
 #### Options supplémentaires
 
+-T *Modifie la rapidité de scan des ports 0-5 , 0 lent au plus rapide 5 mais moins preciss*
+
+-O *Détermine l'OS de la cible*
+
+### Connexion à distance
+
+Tentative de connexion avec les services Telnet et SSH.
+
+`telnet @IP`
+`ssh root@@IP`
+
+### Scan de vulnérabilités avec Nessus
+
+Téléchargement depuis le site pour obetnir un paquet deb.
+Installation avek dpkg (gestionnaire de paquet debian):
+`dpkg -i nom_de_paquet.deb`
+
+Une fois install, il faut lancer le serveur Nessus :
+`/etc/init.d/nessusd start`
+
+Acces au service via le navigateur web en https et le port 8834 :
+`https://localhost:8834`
+
+Sélectionner son offre (Essentials).
+Obtenir pour rentrer le code d'activation.
+
+Entrer le nom d'utilsiateur et son mot de passe pour la connexion en local.
+Nessus va alors télécharger tous les autres composants nécessaires.
+
+Dans *Setting* > *Advanced Settings* > *Scanning* verifier que le *Safe Checks* est à Yes car sans cela le scan pourrait provoquer un disfonctionnement du réseau et dy système.
+Lancement d'un scan avec le bouton *New Scan*, choisir le type de scan adéquat.
+
+OpenVAS est une version fork de Nessus en open-source.
+
 ## 3. Exploitation
+
+Contrôle sur un système.
+
+### Medusa
+
+Système parallèle d'ouverture de session par burte force qui tente d'accéder à des services d'authentification à distance.
+Connaitre l'@IP, le service, avoir des nom d'utilisateurs potentiels et une wordlist de mots de passe.
+
+Wordlist déjà fournis avec Kali :
+`/usr/share/wordlists`
+`/usr/share/john/password.lst`
+
+Commande Medusa :
+`medusa -h @IP -u nom_utilisateur -P wordlist -M service`
+
+-h *@IP de l'hôte*
+-u *nom de l'utilisateur*
+-U *fichier contenant une liste d'utilisateurs à passer*
+-p *un seul mot de passe*
+-P *fichier contenant une liste de mots de passe à passer*
+-M *nom du service*
+
+Autres logiciels : Hydra, ...
+
+### Metasploit
+
+Metasploit Framwork permet de sélectionner la cible et slectionner les charges *(payload)* à effectuer.
+Exploite les systèmes scannés.
+Exploitation en CLI avec Msfconsole :
+`msfconsole`
+
+Mettre à jour MetasploitF :
+`msfupdate`
+*Inutil dans Kali.*
+
+Rechercher l'exploit :
+`search nom_exploit`
+*Possibilité de rechercher par date, entrer la date apres search*
+
+Utiliser l'exploit :
+`use nom_exploit`
+
+Examiner les charges disponibles :
+`show payloads`
+
+Sélectionner le payload :
+`set payload nom_payload`
+
+Connaître les options disponibles de la charge :
+`show options`
+
+Configurations des hôtes distant *(Remote)* et local *(Local)* :
+`set RHOST @IP_distante`
+`set LHOST @IP_locale`
+
+Démarrer l'exploit :
+`exploit`
+
+Partie précédente : [2. Scan](#2-scan)
+Partie suivante : [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
+
+## 4. Postexploitation et maintien de l'accès
