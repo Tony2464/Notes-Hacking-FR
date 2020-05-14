@@ -37,6 +37,15 @@
   - [3. Exploitation](#3-exploitation)
     - [Medusa](#medusa)
     - [Metasploit](#metasploit)
+    - [Meterpreter](#meterpreter)
+    - [John The Ripper](#john-the-ripper)
+      - [Craquage des mots de passe en local](#craquage-des-mots-de-passe-en-local)
+        - [SamDump2](#samdump2)
+        - [BkHive](#bkhive)
+        - [John](#john)
+      - [Craquage à distance](#craquage-%c3%a0-distance)
+      - [Craquage des mots de passe UNIX/Linux et élévation des privilèges](#craquage-des-mots-de-passe-unixlinux-et-%c3%a9l%c3%a9vation-des-privil%c3%a8ges)
+    - [Réinitialisation de mots de passe](#r%c3%a9initialisation-de-mots-de-passe)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 ## Abréviations
@@ -352,6 +361,8 @@ OpenVAS est une version fork de Nessus en open-source.
 ## 3. Exploitation
 
 Contrôle sur un système.
+Partie précédente : [2. Scan](#2-scan)
+Partie suivante : [4. Exploitation](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 ### Medusa
 
@@ -410,5 +421,101 @@ Démarrer l'exploit :
 
 Partie précédente : [2. Scan](#2-scan)
 Partie suivante : [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
+
+Exemples de charges *(payloads)* à envoyer sur les machines Windows :
+
+- windows/adduser *crée sur la machine cible un nouvel utilisateur appartenant au groupe administrateur*
+- windows/exec *Exécute sur la machine cible un binaire (.exe)*
+- windows/shell_bind_tcp *Ouvre sur la machine cible un shell de commande et attend une connexion*
+- windows/shell_reverse_tcp *La machine cible se connecte à l'assaillant et ouvre un shell de commande*
+- windows/meterpreter/bind_tcp *Installe Meterpreter sur la machine cible et attend une connexion*
+- windows/meterpetrer/reverse_tcp *Installe Meterpreter sur la machine cible et crée une connexion de retour à l'assaillant*
+- windows/vncinjetc/bind_tcp *Installe VNC sur la machine cible et attend une connexion*
+- windows/vncinjetc/reverse_tcp *Installe VNC sur la machine cible et renvoie une connexion VNC à la cible*
+
+### Meterpreter
+
+Charge de Matasploit qui donne à l'assaillant un shell de commande pour interagir avec la machine cible.
+
+Avantages :
+
+- s'execute en memoire
+- pas d'utilisation du disque
+- discret
+- difficile à détecter
+- s'éxectute avec les droits associés au programme qui a été exploité
+- ne lance pas de nouveau processus
+
+Commandes utiles :
+
+- `migrate` : deplace le serveur vers un autre processus.
+- `cat` : afficher le contenu d'un fichier.
+- `download` : télecharger une copie d'un fichier ou répértoire de la machine cible.
+- `upload` : transférer des fichiers vers la machine cible.
+- `edit` : éditer un fichier.
+- `execute` : éxecuter une commande.
+- `kill` :  terminer un processus.
+
+### John The Ripper
+
+Craquage de mots de passe pour augmenter les privilèges.
+
+1. Localiser le fichier des mots de passe chiffrés sur le système et le télecharger.
+2. Employer un outil pour convertir les mots de passe chiffrés en mots de passe en clair.
+
+Tester la config avec john :
+`john --test`
+
+#### Craquage des mots de passe en local
+
+Sur Windows, le fichier de mots de passe se nomme SAM *(Security Account MAnager)*
+Présent dans le dossier **C:\Windows\System32\Config\\**
+Cependant Windows bloque l'acces a ce fichier, il faut donc booter sur un autre OS pour contourner ce verrouillage.
+
+Un fois booté sur un autre OS, il faut monter le disque local de la machine :
+`fdisk -l` *Pour lister les disques présents*
+`mkdir /mnt/sda1` *Créer un point de montage*
+`mount dev/sda1 /mnt/sda1` *Monter le disque cible*
+
+Rechercher le fichier SAM :
+`cd /mnt/sda1/Windows/System32/config`
+
+##### SamDump2
+
+Déchiffrer le fichier SAM avec SamDump2 qui se sert d'un fichier system *(situé à côté du fichier SAM normalement)* sur la machine locale pour déchiffrer :
+`samdump2 SAM system > /tmp/mdp_chiffres.txt`
+
+Vérifier que les mots de passe ont bien été copiés :
+`cat /tmp/mdp_chiffres.txt`
+
+##### BkHive
+
+Sur certains systèmes Windows l'accès au mots de passe chiffrés peut necissiter une étapes supplémentaire.
+BkHive sert à extraire la clef syskey à partir de la ruche système.
+
+`bkhive system cle_sys.txt`
+`samdump2 SAM cle_sys.txt > /tmp/mdp_chiffres.txt`
+
+##### John
+
+Craquer le fichier contenant les mots de passe chiffrés :
+`john /tmp/mdp_chiffres.txt`
+
+#### Craquage à distance
+
+Avec une session Meterpreter, une commande permet de contourner les mécanismes de sécurité de Windows et d'obtenir la liste des mots de passe hashés :
+`hasdump`
+
+Il suffit plus qu'à copier cette liste affichée à l'écran.
+
+#### Craquage des mots de passe UNIX/Linux et élévation des privilèges
+
+Le fichier contenant les mots de passe chiffrés est situé dans :
+`/etc/shadow`
+Il faut cependant avoir un niveau de privilège suffisant pour y acceder.
+Pour contrer ce problème, nous pouvons obtenir les obtenir en combinant les fichiers *passwd* et *shadow*:
+`unshadow /etc/passwd /etc/shadow > /tmp/linux_mdp_chiffres.txt`
+
+### Réinitialisation de mots de passe
 
 ## 4. Postexploitation et maintien de l'accès
