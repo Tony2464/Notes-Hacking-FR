@@ -115,7 +115,7 @@ Exemples de recherches avec des attributs :
 Autre attributs :
 intitle: *Cherche les sites dont le titre contient le mot recherche*
 inurl: *Cherche les sites dont l'url contient le mot recherche*
-cache: *Cherche dans les chaches du moteur de recherche*
+cache: *Cherche dans les caches du moteur de recherche*
 filetype: *Cherche par type de fichier*
 
 Possibilité de combiner les attributs
@@ -126,7 +126,7 @@ Recommander d'utiliser les autres moteurs de recherche.
 
 ### TheHarvester
 
-Recherches d’adresses de messagerie, de sous-domaine et hotes appartenant a un nom de domaine.
+Recherches d’adresses de messagerie, de sous-domaine et hotes appartenant à un nom de domaine.
 
 `theHarvester -d nom_de_domaine -l 10 -b google`
 
@@ -173,14 +173,14 @@ Sacnner DNS et enumerer les @IP actifs du nom de domaine :
 
 ### Metagoofil
 
-Récupérer des métadonnées sur internet a partir d’un nom de domaine :
+Récupérer des métadonnées sur internet à partir d’un nom de domaine :
 
 `metagoofil`
 
 -d *domaine*
 -t *type de fichier*
 -l *limite de recherche*
--n *limte de fichiers a telecharger*
+-n *limte de fichiers à telecharger*
 -o *dossier de sortie*
 -f *fichier ou enregistrer les liens html*
 
@@ -204,7 +204,7 @@ Partie suivante : [3. Exploitation](#3-exploitation)
 1. Déterminer si un système est actif avec des paquets ping
 2. Scanner le ports du système avec Nmap
 3. Utiliser le moteur de scripts Nmap (NSE, Nmap Scripting Engine) pour examiner de façon plus précise la cible
-4. Scanner le système a la recherche de vulnérabilités avec Nessus
+4. Scanner le système à la recherche de vulnérabilités avec Nessus
 
 ### Liste de numéros de ports et services associés communs
 
@@ -228,7 +228,7 @@ Partie suivante : [3. Exploitation](#3-exploitation)
 
 ### Ping
 
-paquet ICMP, envopie d’une requete ICMP Echo.
+paquet ICMP, envoie d’une requête ICMP Echo.
 `ping @IP`
 
 icmp_seq *ordre du paquet*
@@ -272,7 +272,7 @@ Scan de port.
 -n *Scan des machines en les considérant comme actives*
 -iL ipList.txt *spécifie un fichier contenant une liste des @IP à scanner*
 
-Un scan SYN ("Stealth Scan") m'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique a la cible d'oublier les paquets precedents et de fermer la connexion.
+Un scan SYN ("Stealth Scan") m'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique à la cible d'oublier les paquets precedents et de fermer la connexion.
 
 #### Scan UDP avec nmap
 
@@ -477,7 +477,7 @@ Tester la config avec john :
 
 Sur Windows, le fichier de mots de passe se nomme SAM *(Security Account MAnager)*
 Présent dans le dossier **C:\Windows\System32\Config\\**
-Cependant Windows bloque l'acces a ce fichier, il faut donc booter sur un autre OS pour contourner ce verrouillage.
+Cependant Windows bloque l'acces à ce fichier, il faut donc booter sur un autre OS pour contourner ce verrouillage.
 
 Un fois booté sur un autre OS, il faut monter le disque local de la machine :
 `fdisk -l` *Pour lister les disques présents*
@@ -558,7 +558,7 @@ Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur 
 -s *@IP source*
 -d *@IP destination*
 
-Lancer Wireshark avec les privilèges pour qu'il ait accès a la configuration des cartes réseau :
+Lancer Wireshark avec les privilèges pour qu'il ait accès à la configuration des cartes réseau :
 `sudo wireshark`
 
 Séléctionner une carte réseau et commencer à capturer le traffic avec les options par défaut.
