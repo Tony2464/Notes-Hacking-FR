@@ -1,6 +1,7 @@
 # Notes test d'intrusion
 
 Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans son ensemble
+
 Anthony Fargette
 
 ## Table des matières
@@ -51,6 +52,7 @@ Anthony Fargette
     - [Réinitialisation de mots de passe sur machine Windows avec chntpw](#r%c3%a9initialisation-de-mots-de-passe-sur-machine-windows-avec-chntpw)
     - [Wireshark](#wireshark)
       - [Macof](#macof)
+    - [Armitage](#armitage)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 ## Abréviations
@@ -67,7 +69,7 @@ Anthony Fargette
 Activer / désactiver une carte réseau :
 `ifconfig eth0 up/down`
 
-Mettre une @IP sur un carte réseau :
+Mettre une @IP sur une carte réseau :
 `ifconfig eth0 up @IP`
 
 Retirer la configuration dhcp :
@@ -545,5 +547,24 @@ Un commutateur *(switch)* fonctionne en transmettant uniquement le traffic desti
 Cependant un commutateur peut se transformer en concentrateur.
 Un commutateur a une mémoire limitée pour la table d'addressage MAC.
 En épuisant cette mémoire d'adresses MAC, il se retrouvera incapable d'effectuer le travail de transferer les paquets au bon port, il diffusera alors le traffic à tous les ports : c'est le *fail open*. Il agira alors comme un simple concentrateur.
+
+Dans le cas inverse, un commutateur configuré en mode "fermé" va arrêter de transferer tous les paquets : c'est le *fail closed*. Dans cette situation l'attanquant va pouvoir provoquer un déni de service du commutateur et bloquer une partie du réseau.
+
+Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur avec des centaines d'adresses MAC aléatoires. Si le commutateur est configuré en mode fail open en cas de défaillance, il va se comporter comme un concentrateur et diffuser le trafic vers tous les ports ce qui permettra d'analyser l'ensemble du traffic.
+
+`macof -i eth0 -s 192.168.56.101 -d @IP_commutateur`
+
+-i *précise la carte réseau*
+-s *@IP source*
+-d *@IP destination*
+
+Lancer Wireshark avec les privilèges pour qu'il ait accès a la configuration des cartes réseau :
+`sudo wireshark`
+
+Séléctionner une carte réseau et commencer à capturer le traffic avec les options par défaut.
+Si les inforamtions ne sont pas chiffrées, on peut alors les voir en clair.
+
+### Armitage
+
 
 ## 4. Postexploitation et maintien de l'accès
