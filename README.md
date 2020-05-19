@@ -1,4 +1,4 @@
-# Notes test d'intrusion
+# Notes test d'intrusion et hacking
 
 Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans son ensemble
 
@@ -6,7 +6,7 @@ Anthony Fargette
 
 ## Table des matières
 
-- [Notes test d'intrusion](#notes-test-dintrusion)
+- [Notes test d'intrusion et hacking](#notes-test-dintrusion-et-hacking)
   - [Table des matières](#table-des-mati%c3%a8res)
   - [Abréviations](#abr%c3%a9viations)
   - [Quelques commandes utiles](#quelques-commandes-utiles)
@@ -242,7 +242,7 @@ Balayage de ping dans une plage d'@IP
 `fping -a -g @IPdebut @IPfin > ipList.txt`
 
 -a *inclure uniquement les machines actives*
--g *definiation d'un plage d'@IP*
+-g *definition d'une plage d'@IP*
 
 ### Scan des ports
 
@@ -272,7 +272,7 @@ Scan de port.
 -n *Scan des machines en les considérant comme actives*
 -iL ipList.txt *spécifie un fichier contenant une liste des @IP à scanner*
 
-Un scan SYN ("Stealth Scan") m'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique à la cible d'oublier les paquets precedents et de fermer la connexion.
+Un scan SYN ("Stealth Scan") n'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique à la cible d'oublier les paquets precedents et de fermer la connexion.
 
 #### Scan UDP avec nmap
 
@@ -287,7 +287,7 @@ Scan plutot lent.
 
 Appelé ainsi car il envoie un paquet contenant de nombreux drapeaux (FIN, PSH et URG).
 
-Si l'OS respecte les normes RFC **(Request For Comments)**, et que un port recoit un paquet danslequel le drapeau SYN, ACK ou RST n'est pas positionné (type de paquet Xmas) alors il doit répondre par un paquet RST.
+Si l'OS respecte les normes RFC **(Request For Comments)**, et que un port recoit un paquet dans lequel le drapeau SYN, ACK ou RST n'est pas positionné (type de paquet Xmas) alors il doit répondre par un paquet RST.
 
 `nmap -sX -p- -Pn @IP`
 
@@ -299,12 +299,12 @@ Si l'OS respecte les normes RFC **(Request For Comments)**, et que un port recoi
 
 -sN *Scan Null*
 
-Comme un scan Xmas, il ne respecte pas les communication TCP normales cependant il est tout de meme different car il ne contient aucun drapeaux.
-Seuls les ports fermes et qui respectent le RFC répondront.
+Comme un scan Xmas, il ne respecte pas les communications TCP normales cependant il est tout de meme different car il ne contient aucun drapeau.
+Seuls les ports fermés et qui respectent le RFC répondront.
 
-Les avantages de ces 2 scans sont que dans certains cas, il est possible de contourner les filtres simple ACL **(Acess Control List)**. L'idée est de bloquer les paquets SYN entrants.
+Les avantages de ces 2 scans sont que dans certains cas, il est possible de contourner les filtres simples ACL **(Acess Control List)**. L'idée est de bloquer les paquets SYN entrants.
 
-Les scans Xmas et Null determinent seulement si les ports sont ouverts ou fermés
+Les scans Xmas et Null determinent seulement si les ports sont ouverts ou fermés.
 
 #### NSE (Nmap Scripting Engine)
 
@@ -344,11 +344,11 @@ Tentative de connexion avec les services Telnet et SSH.
 
 ### Scan de vulnérabilités avec Nessus
 
-Téléchargement depuis le site pour obetnir un paquet deb.
+Téléchargement depuis le site pour obtenir un paquet deb.
 Installation avek dpkg (gestionnaire de paquet debian):
 `dpkg -i nom_de_paquet.deb`
 
-Une fois install, il faut lancer le serveur Nessus :
+Une fois installé, il faut lancer le serveur Nessus :
 `/etc/init.d/nessusd start`
 
 Acces au service via le navigateur web en https et le port 8834 :
@@ -357,10 +357,10 @@ Acces au service via le navigateur web en https et le port 8834 :
 Sélectionner son offre (Essentials).
 Obtenir pour rentrer le code d'activation.
 
-Entrer le nom d'utilsiateur et son mot de passe pour la connexion en local.
+Entrer le nom d'utilisateur et son mot de passe pour la connexion en local.
 Nessus va alors télécharger tous les autres composants nécessaires.
 
-Dans *Setting* > *Advanced Settings* > *Scanning* verifier que le *Safe Checks* est à Yes car sans cela le scan pourrait provoquer un disfonctionnement du réseau et dy système.
+Dans *Setting* > *Advanced Settings* > *Scanning* verifier que le *Safe Checks* est à Yes car sans cela le scan pourrait provoquer un disfonctionnement du réseau et du système.
 Lancement d'un scan avec le bouton *New Scan*, choisir le type de scan adéquat.
 
 OpenVAS est une version fork de Nessus en open-source.
@@ -373,8 +373,8 @@ Partie suivante : [4. Exploitation](#4-postexploitation-et-maintien-de-lacc%c3%a
 
 ### Medusa
 
-Système parallèle d'ouverture de session par burte force qui tente d'accéder à des services d'authentification à distance.
-Connaitre l'@IP, le service, avoir des nom d'utilisateurs potentiels et une wordlist de mots de passe.
+Système parallèle d'ouverture de session par brute force qui tente d'accéder à des services d'authentification à distance.
+Connaitre l'@IP, le service, avoir des noms d'utilisateurs potentiels et une wordlist de mots de passe.
 
 Wordlist déjà fournis avec Kali :
 `/usr/share/wordlists`
@@ -394,7 +394,7 @@ Autres logiciels : Hydra, ...
 
 ### Metasploit
 
-Metasploit Framwork permet de sélectionner la cible et slectionner les charges *(payload)* à effectuer.
+Metasploit Framework permet de sélectionner la cible et sélectionner les charges *(payload)* à effectuer.
 Exploite les systèmes scannés.
 Exploitation en CLI avec Msfconsole :
 `msfconsole`
@@ -419,7 +419,7 @@ Sélectionner le payload :
 Connaître les options disponibles de la charge :
 `show options`
 
-Configurations des hôtes distant *(Remote)* et local *(Local)* :
+Configurations des hôtes distants *(Remote)* et locals *(Local)* :
 `set RHOST @IP_distante`
 `set LHOST @IP_locale`
 
@@ -446,18 +446,18 @@ Charge de Matasploit qui donne à l'assaillant un shell de commande pour interag
 
 Avantages :
 
-- s'execute en memoire
+- s'exécute en mémoire
 - pas d'utilisation du disque
 - discret
 - difficile à détecter
-- s'éxectute avec les droits associés au programme qui a été exploité
-- ne lance pas de nouveau processus
+- s'exécute avec les droits associés au programme qui a été exploité
+- ne lance pas de nouveaux processus
 
 Commandes utiles :
 
-- `migrate` : deplace le serveur vers un autre processus.
+- `migrate` : déplace le serveur vers un autre processus.
 - `cat` : afficher le contenu d'un fichier.
-- `download` : télecharger une copie d'un fichier ou répértoire de la machine cible.
+- `download` : télécharger une copie d'un fichier ou répértoire de la machine cible.
 - `upload` : transférer des fichiers vers la machine cible.
 - `edit` : éditer un fichier.
 - `execute` : éxecuter une commande.
@@ -467,7 +467,7 @@ Commandes utiles :
 
 Craquage de mots de passe pour augmenter les privilèges.
 
-1. Localiser le fichier des mots de passe chiffrés sur le système et le télecharger.
+1. Localiser le fichier des mots de passe chiffrés sur le système et le télécharger.
 2. Employer un outil pour convertir les mots de passe chiffrés en mots de passe en clair.
 
 Tester la config avec john :
@@ -479,7 +479,7 @@ Sur Windows, le fichier de mots de passe se nomme SAM *(Security Account MAnager
 Présent dans le dossier **C:\Windows\System32\Config\\**
 Cependant Windows bloque l'acces à ce fichier, il faut donc booter sur un autre OS pour contourner ce verrouillage.
 
-Un fois booté sur un autre OS, il faut monter le disque local de la machine :
+Une fois booté sur un autre OS, il faut monter le disque local de la machine :
 `fdisk -l` *Pour lister les disques présents*
 `mkdir /mnt/sda1` *Créer un point de montage*
 `mount dev/sda1 /mnt/sda1` *Monter le disque cible*
@@ -497,7 +497,7 @@ Vérifier que les mots de passe ont bien été copiés :
 
 ##### BkHive
 
-Sur certains systèmes Windows l'accès au mots de passe chiffrés peut necissiter une étapes supplémentaire.
+Sur certains systèmes Windows l'accès aux mots de passe chiffrés peut nécissiter une étape supplémentaire.
 BkHive sert à extraire la clef syskey à partir de la ruche système.
 
 `bkhive system cle_sys.txt`
@@ -519,8 +519,8 @@ Il suffit plus qu'à copier cette liste affichée à l'écran.
 
 Le fichier contenant les mots de passe chiffrés est situé dans :
 `/etc/shadow`
-Il faut cependant avoir un niveau de privilège suffisant pour y acceder.
-Pour contrer ce problème, nous pouvons obtenir les obtenir en combinant les fichiers *passwd* et *shadow*:
+Il faut cependant avoir un niveau de privilège suffisant pour y accéder.
+Pour contrer ce problème, nous pouvons les obtenir en combinant les fichiers *passwd* et *shadow*:
 `unshadow /etc/passwd /etc/shadow > /tmp/linux_mdp_chiffres.txt`
 
 ### Réinitialisation de mots de passe sur machine Windows avec chntpw
@@ -540,15 +540,15 @@ La plupart des cartes réseau opèrent en mode non-promiscuité. Cela signifie q
 En mode promiscuité, la carte réseau accepte tous les paquets entrants.
 
 Un concentrateur *(hub)* fonctionne en transmettant tout le traffic à tous les appareils connectés à ses ports.
-Un commutateur *(switch)* fonctionne en transmettant uniquement le traffic destiné au port en comparant avec l'adresse MAC et le numréro de port  pré-enregistrés de la carte réseau.
+Un commutateur *(switch)* fonctionne en transmettant uniquement le traffic destiné au port en comparant avec l'adresse MAC et le numéro de port pré-enregistrés de la carte réseau.
 
 #### Macof
 
 Cependant un commutateur peut se transformer en concentrateur.
 Un commutateur a une mémoire limitée pour la table d'addressage MAC.
-En épuisant cette mémoire d'adresses MAC, il se retrouvera incapable d'effectuer le travail de transferer les paquets au bon port, il diffusera alors le traffic à tous les ports : c'est le *fail open*. Il agira alors comme un simple concentrateur.
+En épuisant cette mémoire d'adresses MAC, il se retrouvera incapable d'effectuer le travail de transférer les paquets au bon port, il diffusera alors le traffic à tous les ports : c'est le *fail open*. Il agira alors comme un simple concentrateur.
 
-Dans le cas inverse, un commutateur configuré en mode "fermé" va arrêter de transferer tous les paquets : c'est le *fail closed*. Dans cette situation l'attanquant va pouvoir provoquer un déni de service du commutateur et bloquer une partie du réseau.
+Dans le cas inverse, un commutateur configuré en mode "fermé" va arrêter de transférer tous les paquets : c'est le *fail closed*. Dans cette situation l'attanquant va pouvoir provoquer un déni de service du commutateur et bloquer une partie du réseau.
 
 Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur avec des centaines d'adresses MAC aléatoires. Si le commutateur est configuré en mode fail open en cas de défaillance, il va se comporter comme un concentrateur et diffuser le trafic vers tous les ports ce qui permettra d'analyser l'ensemble du traffic.
 
