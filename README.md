@@ -1,8 +1,11 @@
-# Notes pour du test d'intrusion Anthony Fargette 2020
+# Notes test d'intrusion
+
+Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans son ensemble
+Anthony Fargette
 
 ## Table des matières
 
-- [Notes pour du test d'intrusion Anthony Fargette 2020](#notes-pour-du-test-dintrusion-anthony-fargette-2020)
+- [Notes test d'intrusion](#notes-test-dintrusion)
   - [Table des matières](#table-des-mati%c3%a8res)
   - [Abréviations](#abr%c3%a9viations)
   - [Quelques commandes utiles](#quelques-commandes-utiles)
@@ -45,7 +48,9 @@
         - [John](#john)
       - [Craquage à distance](#craquage-%c3%a0-distance)
       - [Craquage des mots de passe UNIX/Linux et élévation des privilèges](#craquage-des-mots-de-passe-unixlinux-et-%c3%a9l%c3%a9vation-des-privil%c3%a8ges)
-    - [Réinitialisation de mots de passe](#r%c3%a9initialisation-de-mots-de-passe)
+    - [Réinitialisation de mots de passe sur machine Windows avec chntpw](#r%c3%a9initialisation-de-mots-de-passe-sur-machine-windows-avec-chntpw)
+    - [Wireshark](#wireshark)
+      - [Macof](#macof)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 ## Abréviations
@@ -516,6 +521,29 @@ Il faut cependant avoir un niveau de privilège suffisant pour y acceder.
 Pour contrer ce problème, nous pouvons obtenir les obtenir en combinant les fichiers *passwd* et *shadow*:
 `unshadow /etc/passwd /etc/shadow > /tmp/linux_mdp_chiffres.txt`
 
-### Réinitialisation de mots de passe
+### Réinitialisation de mots de passe sur machine Windows avec chntpw
+
+Nécessite un accès physique de la machine cible.
+Objectif : écraser le fichier SAM et créer un nouveau mot de passe vide pour n'importe quel utilisateur.
+Booter sur un autre OS et monter la partition de la machine.
+Commande :
+`chntpw -i /mnt/sda1/Windows/System32/config/SAM`
+
+Choisir *Edit user data and passwords*
+-i *mode interactif*
+
+### Wireshark
+
+La plupart des cartes réseau opèrent en mode non-promiscuité. Cela signifie que l'interface réseau de la carte NIC *(Network Interface Card)* ne transmet que le trafic qui lui est déstiné sinon elle ne transmet pas.
+En mode promiscuité, la carte réseau accepte tous les paquets entrants.
+
+Un concentrateur *(hub)* fonctionne en transmettant tout le traffic à tous les appareils connectés à ses ports.
+Un commutateur *(switch)* fonctionne en transmettant uniquement le traffic destiné au port en comparant avec l'adresse MAC et le numréro de port  pré-enregistrés de la carte réseau.
+
+#### Macof
+
+Cependant un commutateur peut se transformer en concentrateur.
+Un commutateur a une mémoire limitée pour la table d'addressage MAC.
+En épuisant cette mémoire d'adresses MAC, il se retrouvera incapable d'effectuer le travail de transferer les paquets au bon port, il diffusera alors le traffic à tous les ports : c'est le *fail open*. Il agira alors comme un simple concentrateur.
 
 ## 4. Postexploitation et maintien de l'accès
