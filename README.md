@@ -87,7 +87,7 @@ Demander la configuration dhcp :
 
 **PTES** *(Penetration Pesting Execution Standard)*
 
-**OSINT** *(Open Source Intellgence)*
+**OSINT** *(Open Source Intelligence)*
 
 ## 1. Reconnaissance
 
@@ -565,6 +565,5 @@ Séléctionner une carte réseau et commencer à capturer le traffic avec les op
 Si les inforamtions ne sont pas chiffrées, on peut alors les voir en clair.
 
 ### Armitage
-
 
 ## 4. Postexploitation et maintien de l'accès
