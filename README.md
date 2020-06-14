@@ -7,11 +7,11 @@ Anthony Fargette
 ## Table des matières
 
 - [Notes test d'intrusion et hacking](#notes-test-dintrusion-et-hacking)
-  - [Table des matières](#table-des-mati%c3%a8res)
-  - [Abréviations](#abr%c3%a9viations)
+  - [Table des matières](#table-des-matières)
+  - [Abréviations](#abréviations)
   - [Quelques commandes utiles](#quelques-commandes-utiles)
-    - [Interfaces réseau](#interfaces-r%c3%a9seau)
-  - [4 Phases de pénétration](#4-phases-de-p%c3%a9n%c3%a9tration)
+    - [Interfaces réseau](#interfaces-réseau)
+  - [4 Phases de pénétration](#4-phases-de-pénétration)
   - [1. Reconnaissance](#1-reconnaissance)
     - [Httrack](#httrack)
     - [Google Hacking](#google-hacking)
@@ -24,20 +24,20 @@ Anthony Fargette
     - [Metagoofil](#metagoofil)
     - [ThreatAgent](#threatagent)
   - [2. Scan](#2-scan)
-    - [4 étapes de scan](#4-%c3%a9tapes-de-scan)
-    - [Liste de numéros de ports et services associés communs](#liste-de-num%c3%a9ros-de-ports-et-services-associ%c3%a9s-communs)
+    - [4 étapes de scan](#4-étapes-de-scan)
+    - [Liste de numéros de ports et services associés communs](#liste-de-numéros-de-ports-et-services-associés-communs)
     - [Ping](#ping)
     - [Fping](#fping)
     - [Scan des ports](#scan-des-ports)
-      - [Connexion en 3 étapes](#connexion-en-3-%c3%a9tapes)
+      - [Connexion en 3 étapes](#connexion-en-3-étapes)
       - [Scan TCP Connect avec Nmap](#scan-tcp-connect-avec-nmap)
       - [Scan UDP avec nmap](#scan-udp-avec-nmap)
       - [Scan Xmas](#scan-xmas)
       - [Scan Null](#scan-null)
       - [NSE (Nmap Scripting Engine)](#nse-nmap-scripting-engine)
-      - [Options supplémentaires](#options-suppl%c3%a9mentaires)
-    - [Connexion à distance](#connexion-%c3%a0-distance)
-    - [Scan de vulnérabilités avec Nessus](#scan-de-vuln%c3%a9rabilit%c3%a9s-avec-nessus)
+      - [Options supplémentaires](#options-supplémentaires)
+    - [Connexion à distance](#connexion-à-distance)
+    - [Scan de vulnérabilités avec Nessus](#scan-de-vulnérabilités-avec-nessus)
   - [3. Exploitation](#3-exploitation)
     - [Medusa](#medusa)
     - [Metasploit](#metasploit)
@@ -47,13 +47,13 @@ Anthony Fargette
         - [SamDump2](#samdump2)
         - [BkHive](#bkhive)
         - [John](#john)
-      - [Craquage à distance](#craquage-%c3%a0-distance)
-      - [Craquage des mots de passe UNIX/Linux et élévation des privilèges](#craquage-des-mots-de-passe-unixlinux-et-%c3%a9l%c3%a9vation-des-privil%c3%a8ges)
-    - [Réinitialisation de mots de passe sur machine Windows avec chntpw](#r%c3%a9initialisation-de-mots-de-passe-sur-machine-windows-avec-chntpw)
+      - [Craquage à distance](#craquage-à-distance)
+      - [Craquage des mots de passe UNIX/Linux et élévation des privilèges](#craquage-des-mots-de-passe-unixlinux-et-élévation-des-privilèges)
+    - [Réinitialisation de mots de passe sur machine Windows avec chntpw](#réinitialisation-de-mots-de-passe-sur-machine-windows-avec-chntpw)
     - [Wireshark](#wireshark)
       - [Macof](#macof)
     - [Armitage](#armitage)
-  - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
+  - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-laccès)
 
 ## Abréviations
 
@@ -85,7 +85,7 @@ Demander la configuration dhcp :
 3. [Exploitation](#3-exploitation)
 4. [Postexploitation et maintien de l’accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
-**PTES** *(Penetration Pesting Execution Standard)*
+**PTES** *(Penetration Testing Execution Standard)*
 
 **OSINT** *(Open Source Intelligence)*
 
@@ -565,5 +565,25 @@ Séléctionner une carte réseau et commencer à capturer le traffic avec les op
 Si les inforamtions ne sont pas chiffrées, on peut alors les voir en clair.
 
 ### Armitage
+
+Armitage est une version de Metasploit Framework avec une interface graphique.
+Vant de lancer Armitage il faut démarrer les services postgresql et metasploit :
+`service postgresql start`
+`service metasploit start`
+
+Nous pouvons alors lancer Armitage :
+`sudo armitage`
+Il affiche alors une boîte de dialogue pour se connecter, laisser les paramètres par défaut et cliquer sur Connect.
+Il demande ensuite de si nous voulons démarrer Metasploit. Cliquer sur Oui.
+
+Identification des cibles potentielles :
+Séléctionner Hosts, Nmap Scan, Quick Scan (OS detect).
+Entrer l'@ IP ou la plage d'@ IP à scanner.
+Exemple :
+`192.168.1.1-255`
+Les cibles potentielles sont ensuite affichées à l'écran.
+
+Nous pouvons effectuer une attaque Hail Mary qui va lancer une vague automatique d'exploits contre la cible sans discretion. Il va mettre en relation les ports découverts par Nmap avec les exploits disponibles de Metasploit. Si la machine est compromise, elle sera affichée avec des éclairs autours.
+Nous pouvons alors consulter la liste des Shell obtenus sur la machine cible en effectuant un clique droit > Shell > Interact.
 
 ## 4. Postexploitation et maintien de l'accès
