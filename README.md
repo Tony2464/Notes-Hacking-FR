@@ -53,6 +53,8 @@ Anthony Fargette
     - [Wireshark](#wireshark)
       - [Macof](#macof)
     - [Armitage](#armitage)
+    - [SET (Social Engineering Toolkit)](#set-social-engineering-toolkit)
+      - [1) Social-Engineering Attacks](#1-social-engineering-attacks)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-laccès)
 
 ## Abréviations
@@ -585,5 +587,36 @@ Les cibles potentielles sont ensuite affichées à l'écran.
 
 Nous pouvons effectuer une attaque Hail Mary qui va lancer une vague automatique d'exploits contre la cible sans discretion. Il va mettre en relation les ports découverts par Nmap avec les exploits disponibles de Metasploit. Si la machine est compromise, elle sera affichée avec des éclairs autours.
 Nous pouvons alors consulter la liste des Shell obtenus sur la machine cible en effectuant un clique droit > Shell > Interact.
+
+### SET (Social Engineering Toolkit)
+
+Outil permettant permettant diverses attaques basées sur l'hameçonnage.
+Lancer SET :
+`sudo setoolkit`
+
+#### 1) Social-Engineering Attacks
+
+Dans cette catégories nous retrouvons :
+
+1. Spear-Phishing Attack Vectors
+Envoi massif de courriels spécifiques avec des pièces jointes malveillantes.
+2. Website Attack Vectors
+Il contient un sous-menu :
+   1. Java Applet Attack Method
+   Nous pouvons selectionner Site Cloner
+   2. Metasploit Browser Exploit Method
+   3. Credential Harvester Attack Method
+   4. Tabnabbing Attack Method
+   5. Web Jacking Attack Method
+   6. Multi-Attack Web Method
+   7. HTA Attack Method
+3. Infectious Media Generator
+4. Create a Payload and Listener
+5. Mass Mailer Attack
+6. Arduino-Based Attack Vector
+7. Wireless Access Point Attack Vector
+8. QRCode Generator Attack Vector
+9. Powershell Attack Vectors
+10. Third Party Modules
 
 ## 4. Postexploitation et maintien de l'accès
