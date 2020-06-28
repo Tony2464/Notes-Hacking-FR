@@ -601,15 +601,6 @@ Dans cette catégories nous retrouvons :
 1. Spear-Phishing Attack Vectors
 Envoi massif de courriels spécifiques avec des pièces jointes malveillantes.
 2. Website Attack Vectors
-Il contient un sous-menu :
-   1. Java Applet Attack Method
-   Nous pouvons selectionner Site Cloner
-   2. Metasploit Browser Exploit Method
-   3. Credential Harvester Attack Method
-   4. Tabnabbing Attack Method
-   5. Web Jacking Attack Method
-   6. Multi-Attack Web Method
-   7. HTA Attack Method
 3. Infectious Media Generator
 4. Create a Payload and Listener
 5. Mass Mailer Attack
