@@ -54,7 +54,8 @@ Anthony Fargette
       - [Macof](#macof)
     - [Armitage](#armitage)
     - [SET (Social Engineering Toolkit)](#set-social-engineering-toolkit)
-      - [1) Social-Engineering Attacks](#1-social-engineering-attacks)
+      - [Menu SET](#menu-set)
+    - [Exploitation Web](#exploitation-web)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-laccès)
 
 ## Abréviations
@@ -594,7 +595,7 @@ Outil permettant permettant diverses attaques basées sur l'hameçonnage.
 Lancer SET :
 `sudo setoolkit`
 
-#### 1) Social-Engineering Attacks
+#### Menu SET
 
 Dans cette catégories nous retrouvons :
 
@@ -618,5 +619,9 @@ Creation de QRCode contenant un lien malveillant
 Injection de codes malveillants et attaques via PowerShell
 **10. Third Party Modules**
 Ajout de nos propore modules
+
+### Exploitation Web
+
+Exemples de framworks pour pour le hacking des aplicaitons web : w3af, Burp Suite, ZAP (Zed Attack Proxy), Websecurify, Paros, ...
 
 ## 4. Postexploitation et maintien de l'accès
