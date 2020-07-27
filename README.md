@@ -66,10 +66,11 @@ Anthony Fargette
 
 ### Interfaces réseau
 
-Énumérer toutes interfaces :
+Énumérer toutes interfaces :  
 `ifconfig -a`
 
 Activer / désactiver une carte réseau :
+
 `ifconfig eth0 up/down`
 
 Mettre une @IP sur une carte réseau :
@@ -111,14 +112,21 @@ En CLI :
 ### Google Hacking
 
 Google hacking ou Google Dork
+
 Recherches avancées avec Google
+
 Exemples de recherches avec des attributs :
+
 `site:url nom_de_la_recherche`
 
 Autre attributs :
+
 intitle: *Cherche les sites dont le titre contient le mot recherche*
+
 inurl: *Cherche les sites dont l'url contient le mot recherche*
+
 cache: *Cherche dans les caches du moteur de recherche*
+
 filetype: *Cherche par type de fichier*
 
 Possibilité de combiner les attributs
@@ -134,8 +142,11 @@ Recherches d’adresses de messagerie, de sous-domaine et hotes appartenant à u
 `theHarvester -d nom_de_domaine -l 10 -b google`
 
 -d *domaine*
+
 -l *limite*
+
 -b *répertoire public de recherche*
+
 -b all *pour utiliser tous les repertoires*
 
 ### Whois
@@ -150,17 +161,23 @@ Site web pour recueillir les informations :
 ### Host
 
 Traduire les noms de domaine en @IP :
+
 `host nom_de_domaine`
 
 Lister les recherches :
+
 `host -a nom_de_domaine`
 
 ### Nslookup
 
 Obtenir les informations du serveur DNS mode interactif :
+
 `nslookup`
+
 `server @IPserver`
+
 `set type=any`
+
 `.`
 
 ### Dig
@@ -245,6 +262,7 @@ Balayage de ping dans une plage d'@IP
 `fping -a -g @IPdebut @IPfin > ipList.txt`
 
 -a *inclure uniquement les machines actives*
+
 -g *definition d'une plage d'@IP*
 
 ### Scan des ports
@@ -268,11 +286,17 @@ Scan de port.
 `nmap -sT -p- -Pn @IPdebut-@IPfin_dernier_octet`
 
 -s *Précision du type de scan à effectuer, par defaut scan SYN*
+
 -sT *Scan TCP Connect*
+
 -sS *Scan SYN*
+
 -p- *Scan de tous les ports à la place des 1000 par défaut*
+
 -P *Saute l'etape de decouverte*
+
 -n *Scan des machines en les considérant comme actives*
+
 -iL ipList.txt *spécifie un fichier contenant une liste des @IP à scanner*
 
 Un scan SYN ("Stealth Scan") n'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique à la cible d'oublier les paquets precedents et de fermer la connexion.
