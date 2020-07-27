@@ -114,16 +114,15 @@ Google hacking ou Google Dork
 
 Recherches avancées avec Google
 
-Exemples de recherches avec des attributs :
-
+Exemples de recherches avec des attributs :  
 `site:url nom_de_la_recherche`
 
 Autre attributs :
 
-intitle: *Cherche les sites dont le titre contient le mot recherche*  
-inurl: *Cherche les sites dont l'url contient le mot recherche*  
-cache: *Cherche dans les caches du moteur de recherche*  
-filetype: *Cherche par type de fichier*
+`intitle` : *Cherche les sites dont le titre contient le mot recherche*  
+`inurl` : *Cherche les sites dont l'url contient le mot recherche*  
+`cache` : *Cherche dans les caches du moteur de recherche*  
+`filetype` : *Cherche par type de fichier*
 
 Possibilité de combiner les attributs
 
@@ -137,10 +136,10 @@ Recherches d’adresses de messagerie, de sous-domaine et hotes appartenant à u
 
 `theHarvester -d nom_de_domaine -l 10 -b google`
 
--d *domaine*  
--l *limite*  
--b *répertoire public de recherche*  
--b all *pour utiliser tous les repertoires*
+`-d` *domaine*  
+`-l` *limite*  
+`-b` *répertoire public de recherche*  
+`-b all` *pour utiliser tous les repertoires*
 
 ### Whois
 
@@ -161,8 +160,7 @@ Lister les recherches :
 
 ### Nslookup
 
-Obtenir les informations du serveur DNS mode interactif :
-
+Obtenir les informations du serveur DNS mode interactif :  
 `nslookup`  
 `server @IPserver`  
 `set type=any`  
@@ -181,15 +179,14 @@ Sacnner DNS et enumerer les @IP actifs du nom de domaine :
 ### Metagoofil
 
 Récupérer des métadonnées sur internet à partir d’un nom de domaine :
-
 `metagoofil`
 
--d *domaine*  
--t *type de fichier*  
--l *limite de recherche*  
--n *limte de fichiers à telecharger*  
--o *dossier de sortie*  
--f *fichier ou enregistrer les liens html*  
+`-d` *domaine*  
+`-t` *type de fichier*  
+`-l` *limite de recherche*  
+`-n` *limte de fichiers à telecharger*  
+`-o` *dossier de sortie*  
+`-f` *fichier ou enregistrer les liens html*  
 
 `metagoofil -d kali.org -t pdf -l 100 -n 25 -o kalipdf -f kalipdf.html`
 
@@ -248,8 +245,8 @@ Balayage de ping dans une plage d'@IP
 
 `fping -a -g @IPdebut @IPfin > ipList.txt`
 
--a *inclure uniquement les machines actives*  
--g *definition d'une plage d'@IP*
+`-a` *inclure uniquement les machines actives*  
+`-g` *definition d'une plage d'@IP*
 
 ### Scan des ports
 
@@ -272,12 +269,12 @@ Scan de port.
 `nmap -sT -p- -Pn @IPdebut-@IPfin_dernier_octet`
 
 -s *Précision du type de scan à effectuer, par defaut scan SYN*  
--sT *Scan TCP Connect*  
--sS *Scan SYN*  
--p- *Scan de tous les ports à la place des 1000 par défaut*  
--P *Saute l'etape de decouverte*  
--n *Scan des machines en les considérant comme actives*  
--iL ipList.txt *spécifie un fichier contenant une liste des @IP à scanner*  
+`-sT` *Scan TCP Connect*  
+`-sS` *Scan SYN*  
+`-p-` *Scan de tous les ports à la place des 1000 par défaut*  
+`-P` *Saute l'etape de decouverte*  
+`-n` *Scan des machines en les considérant comme actives*  
+`-iL ipList.txt` *spécifie un fichier contenant une liste des @IP à scanner*  
 
 Un scan SYN ("Stealth Scan") n'effectue que les 2 étapes puis renvoie un RST (réinitialisation) qui indique à la cible d'oublier les paquets precedents et de fermer la connexion.
 
@@ -287,8 +284,8 @@ Scan plutot lent.
 
 `nmap -sU @IP`
 
--sU *Scan UDP*  
--sV *Scan avec version*
+`-sU` *Scan UDP*  
+`-sV` *Scan avec version*
 
 #### Scan Xmas
 
@@ -298,13 +295,13 @@ Si l'OS respecte les normes RFC **(Request For Comments)**, et que un port recoi
 
 `nmap -sX -p- -Pn @IP`
 
--X *Scan Xmas*
+`-X` *Scan Xmas*
 
 #### Scan Null
 
 `nmap -sN -p- -Pn @IP`
 
--sN *Scan Null*
+`-sN` *Scan Null*
 
 Comme un scan Xmas, il ne respecte pas les communications TCP normales cependant il est tout de meme different car il ne contient aucun drapeau.
 Seuls les ports fermés et qui respectent le RFC répondront.
@@ -338,8 +335,8 @@ Différentes catégories :
 
 #### Options supplémentaires
 
--T *Modifie la rapidité de scan des ports 0-5 , 0 lent au plus rapide 5 mais moins preciss*  
--O *Détermine l'OS de la cible*
+`-T` *Modifie la rapidité de scan des ports 0-5 , 0 lent au plus rapide 5 mais moins preciss*  
+`-O` *Détermine l'OS de la cible*
 
 ### Connexion à distance
 
@@ -382,19 +379,19 @@ Partie suivante : [4. Exploitation](#4-postexploitation-et-maintien-de-lacc%c3%a
 Système parallèle d'ouverture de session par brute force qui tente d'accéder à des services d'authentification à distance.
 Connaitre l'@IP, le service, avoir des noms d'utilisateurs potentiels et une wordlist de mots de passe.
 
-Wordlist déjà fournis avec Kali :
+Wordlist déjà fournis avec Kali :  
 `/usr/share/wordlists`  
 `/usr/share/john/password.lst`
 
-Commande Medusa :
+Commande Medusa :  
 `medusa -h @IP -u nom_utilisateur -P wordlist -M service`
 
--h *@IP de l'hôte*  
--u *nom de l'utilisateur*  
--U *fichier contenant une liste d'utilisateurs à passer*  
--p *un seul mot de passe*  
--P *fichier contenant une liste de mots de passe à passer*  
--M *nom du service*
+`-h` *@IP de l'hôte*  
+`-u` *nom de l'utilisateur*  
+`-U` *fichier contenant une liste d'utilisateurs à passer*  
+`-p` *un seul mot de passe*  
+`-P` *fichier contenant une liste de mots de passe à passer*  
+`-M` *nom du service*
 
 Autres logiciels : Hydra, ...
 
@@ -512,8 +509,7 @@ Vérifier que les mots de passe ont bien été copiés :
 ##### BkHive
 
 Sur certains systèmes Windows l'accès aux mots de passe chiffrés peut nécissiter une étape supplémentaire.
-BkHive sert à extraire la clef syskey à partir de la ruche système.
-
+BkHive sert à extraire la clef syskey à partir de la ruche système.  
 `bkhive system cle_sys.txt`  
 `samdump2 SAM cle_sys.txt > /tmp/mdp_chiffres.txt`
 
@@ -568,9 +564,9 @@ Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur 
 
 `macof -i eth0 -s 192.168.56.101 -d @IP_commutateur`
 
--i *précise la carte réseau*  
--s *@IP source*  
--d *@IP destination*
+`-i` *précise la carte réseau*  
+`-s` *@IP source*  
+`-d` *@IP destination*
 
 Lancer Wireshark avec les privilèges pour qu'il ait accès à la configuration des cartes réseau :  
 `sudo wireshark`
