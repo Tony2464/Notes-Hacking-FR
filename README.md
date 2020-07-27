@@ -1,8 +1,6 @@
 # Notes test d'intrusion et hacking
 
-Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans son ensemble
-
-Anthony Fargette
+Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans son ensemble.
 
 ## Table des matières
 
