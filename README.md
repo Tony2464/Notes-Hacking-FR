@@ -56,6 +56,10 @@ Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans
     - [Exploitation Web](#exploitation-web)
       - [Nikto](#nikto)
       - [w3af](#w3af)
+    - [Indexation web](#indexation-web)
+      - [WebScarab](#webscarab)
+    - [Attaques par injection de codes](#attaques-par-injection-de-codes)
+    - [Cross-site scripting (XSS)](#cross-site-scripting-xss)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-laccès)
 
 ## Abréviations
@@ -653,5 +657,17 @@ Scan simple :
 Si on ne précise pas de port, il scan automatiquement le port 80.
 
 #### w3af
+
+A completer
+
+### Indexation web
+
+#### WebScarab
+
+A completer
+
+### Attaques par injection de codes
+
+### Cross-site scripting (XSS)
 
 ## 4. Postexploitation et maintien de l'accès
