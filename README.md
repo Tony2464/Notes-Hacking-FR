@@ -54,6 +54,8 @@ Notes pour du test d'intrusion et tout lien avec la sécurité informatique dans
     - [SET (Social Engineering Toolkit)](#set-social-engineering-toolkit)
       - [Menu SET](#menu-set)
     - [Exploitation Web](#exploitation-web)
+      - [Nikto](#nikto)
+      - [w3af](#w3af)
   - [4. Postexploitation et maintien de l'accès](#4-postexploitation-et-maintien-de-laccès)
 
 ## Abréviations
@@ -627,6 +629,29 @@ Ajout de nos propore modules
 
 ### Exploitation Web
 
-Exemples de framworks pour pour le hacking des aplicaitons web : w3af, Burp Suite, ZAP (Zed Attack Proxy), Websecurify, Paros, ...
+Exemples de framworks pour pour le hacking des aplicaitons web : w3af, Burp Suite, ZAP (Zed Attack Proxy), Websecurify, Paros, ...  
+3 idées principales :  
+
+1. Interception des requêtes à l'aide d'un proxy, possibilité de modifier les variables avant qu'elles n'arrivent à l'application web.
+
+2. Recherche de toutes les pages web, repertoires ou fichiers de l'application web à l'aide d'outils d'exploration automatisés. 
+
+3. Analyse des réponses renvoyées par les applications et recherches de vulnérabilités. (Injection SQL, failles XSS, Directory Traversal, ...)  
+
+#### Nikto
+
+Après la decouverte de ports utilsés tels que le port web 80 ou le port web sécurisé 443, nous pouvons utiliser Nikto.  
+Nikto est un scanner de vulnérabilités web écrit en Perl. Il permet en autre de vérifier l'obsolescence des outils et services du serveur web, scanner des répertoires et fichiers, ...  
+
+Scan simple :  
+`nikto -h @IP -p numero_de_port`
+
+`-h` *@IP cible*
+`-p` *numéro de port, intervalle : 1-100, plusieurs ports 80,443*  
+`-o` *nom du fchier de sortie*
+
+Si on ne précise pas de port, il scan automatiquement le port 80.
+
+#### w3af
 
 ## 4. Postexploitation et maintien de l'accès
