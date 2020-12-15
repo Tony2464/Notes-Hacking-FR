@@ -553,18 +553,18 @@ Choisir *Edit user data and passwords*
 La plupart des cartes réseau opèrent en mode non-promiscuité. Cela signifie que l'interface réseau de la carte NIC *(Network Interface Card)* ne transmet que le trafic qui lui est déstiné sinon elle ne transmet pas.
 En mode promiscuité, la carte réseau accepte tous les paquets entrants.
 
-Un concentrateur *(hub)* fonctionne en transmettant tout le traffic à tous les appareils connectés à ses ports.
-Un commutateur *(switch)* fonctionne en transmettant uniquement le traffic destiné au port en comparant avec l'adresse MAC et le numéro de port pré-enregistrés de la carte réseau.
+Un concentrateur *(hub)* fonctionne en transmettant tout le trafic à tous les appareils connectés à ses ports.
+Un commutateur *(switch)* fonctionne en transmettant uniquement le trafic destiné au port en comparant avec l'adresse MAC et le numéro de port pré-enregistrés de la carte réseau.
 
 #### Macof
 
 Cependant un commutateur peut se transformer en concentrateur.
 Un commutateur a une mémoire limitée pour la table d'addressage MAC.
-En épuisant cette mémoire d'adresses MAC, il se retrouvera incapable d'effectuer le travail de transférer les paquets au bon port, il diffusera alors le traffic à tous les ports : c'est le *fail open*. Il agira alors comme un simple concentrateur.
+En épuisant cette mémoire d'adresses MAC, il se retrouvera incapable d'effectuer le travail de transférer les paquets au bon port, il diffusera alors le trafic à tous les ports : c'est le *fail open*. Il agira alors comme un simple concentrateur.
 
-Dans le cas inverse, un commutateur configuré en mode "fermé" va arrêter de transférer tous les paquets : c'est le *fail closed*. Dans cette situation l'attanquant va pouvoir provoquer un déni de service du commutateur et bloquer une partie du réseau.
+Dans le cas inverse, un commutateur configuré en mode "fermé" va arrêter de transférer tous les paquets : c'est le *fail closed*. Dans cette situation l'attaquant va pouvoir provoquer un déni de service du commutateur et bloquer une partie du réseau.
 
-Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur avec des centaines d'adresses MAC aléatoires. Si le commutateur est configuré en mode fail open en cas de défaillance, il va se comporter comme un concentrateur et diffuser le trafic vers tous les ports ce qui permettra d'analyser l'ensemble du traffic.
+Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur avec des centaines d'adresses MAC aléatoires. Si le commutateur est configuré en mode fail open en cas de défaillance, il va se comporter comme un concentrateur et diffuser le trafic vers tous les ports ce qui permettra d'analyser l'ensemble du trafic.
 
 `macof -i eth0 -s 192.168.56.101 -d @IP_commutateur`
 
@@ -575,13 +575,13 @@ Macof de la suite Dsniff est un outil qui va permettre d'inonder le commutateur 
 Lancer Wireshark avec les privilèges pour qu'il ait accès à la configuration des cartes réseau :  
 `sudo wireshark`
 
-Séléctionner une carte réseau et commencer à capturer le traffic avec les options par défaut.
-Si les inforamtions ne sont pas chiffrées, on peut alors les voir en clair.
+Séléctionner une carte réseau et commencer à capturer le trafic avec les options par défaut.
+Si les informations ne sont pas chiffrées, on peut alors les voir en clair.
 
 ### Armitage
 
 Armitage est une version de Metasploit Framework avec une interface graphique.
-Vant de lancer Armitage il faut démarrer les services postgresql et metasploit :  
+Avant de lancer Armitage il faut démarrer les services postgresql et metasploit :  
 `service postgresql start`  
 `service metasploit start`
 
