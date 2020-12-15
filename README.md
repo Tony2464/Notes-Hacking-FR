@@ -177,7 +177,7 @@ Tenter un transfert de zone sur un serveur DNS :
 
 ### Fierce
 
-Sacnner DNS et enumerer les @IP actifs du nom de domaine :  
+Scanner DNS et énumérer les @IP actifs du nom de domaine :  
 `fierce -dns nom_de_domaine`
 
 ### Metagoofil
@@ -536,6 +536,8 @@ Le fichier contenant les mots de passe chiffrés est situé dans :
 Il faut cependant avoir un niveau de privilège suffisant pour y accéder.  
 Pour contrer ce problème, nous pouvons les obtenir en combinant les fichiers *passwd* et *shadow*:  
 `unshadow /etc/passwd /etc/shadow > /tmp/linux_mdp_chiffres.txt`
+
+Puis cracker la liste avec John par exemple.
 
 ### Réinitialisation de mots de passe sur machine Windows avec chntpw
 
